@@ -17,12 +17,4 @@ class Product extends Model
     {
         $query->where('status', 'available');
     }
-
-    public function storeProcessing($data): void
-    {
-        $product = new Product();
-        $data['status'] = $data->status ?? "unavailable";
-        $product->fill($data);
-        $product->save();
-    }
 }

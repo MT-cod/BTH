@@ -21,13 +21,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-/*Route::resource(
-    'products',
-    ProductsController::class,
-    ['only' => ['index', 'show', 'store', 'update', 'destroy']]
-);*/
 Route::middleware('auth:sanctum')->resource(
     'products',
     ProductsController::class,
