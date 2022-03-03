@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
+use App\Jobs\SendEmailJob;
 
 class ProductsController extends Controller
 {
@@ -21,68 +27,69 @@ class ProductsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreProductRequest $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request): RedirectResponse
     {
-        //
+        try {
+            $productData = Product::create($request->validated()->get()->toArray());
+            //dispatch(new SendEmailJob($productData));
+            flash('Продкут успешно создан!')->success()->important();
+            return Redirect::to($_SERVER['HTTP_REFERER']);
+        } catch (\Throwable $e) {
+            flash('Не удалось создать продукт!')->error()->important();
+            return Redirect::to($_SERVER['HTTP_REFERER']);
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @param Product $product
+     * @return JsonResponse
      */
-    public function show(Product $product)
+    public function show(Product $product): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
-    {
-        //
+        return Response::json(Product::findOrFail($product)->get()->toArray());
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @param UpdateProductRequest $request
+     * @param Product $product
+     * @return RedirectResponse
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        try {
+            $product->update($request->validated());
+            flash('Продкут успешно изменён.')->success()->important();
+            return Redirect::to($_SERVER['HTTP_REFERER']);
+        } catch (\Throwable $e) {
+            flash('Не удалось изменить продукт!')->error()->important();
+            return Redirect::to($_SERVER['HTTP_REFERER']);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @param Product $product
+     * @return RedirectResponse
      */
-    public function destroy(Product $product)
+    public function destroy(Product $product): RedirectResponse
     {
-        //
+        try {
+            $product->delete();
+            flash('Продкут успешно удалён.')->success()->important();
+            return Redirect::to($_SERVER['HTTP_REFERER']);
+        } catch (\Throwable $e) {
+            flash('Не удалось удалить продукт!')->error()->important();
+            return Redirect::to($_SERVER['HTTP_REFERER']);
+        }
     }
 }

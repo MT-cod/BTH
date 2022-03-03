@@ -3,19 +3,11 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class StoreProductRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return false;
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,7 +16,10 @@ class StoreProductRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'article' => ['required', 'string', 'max:255', 'unique:products'],
+            'name' => ['required', 'string', 'min:10', 'max:255'],
+            'status' => ['required', 'string', 'max:255', Rule::in(["available", "unavailable"])],
+            'data' => ['nullable', 'json'],
         ];
     }
 }

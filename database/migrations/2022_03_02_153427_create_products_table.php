@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('article', 255)->unique()->index();
             $table->string('name', 255);
-            $table->string('status', 255)->generatedAs();
+            $table->string('status', 255);
             $table->jsonb('data')->nullable();
             $table->softDeletes();
         });
