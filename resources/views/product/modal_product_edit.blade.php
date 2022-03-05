@@ -1,72 +1,36 @@
-<div class="modal fade" id="modal-item-edit" tabindex="-1" role="dialog" aria-hidden="true" style="max-height:100vh !important; overflow-y:scroll !important;">
-    <div class="modal-dialog modal-dialog-centered modal-xl">
-        <div class="modal-content">
-            <form id="modal-item-edit-form" method="POST" action="/goods/" enctype="multipart/form-data">
+<div class="modal fade modal-product-edit" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="top: 4vh; left: calc(50vw - 50%); position: absolute; background: #3c4054">
+            <form id="modal-product-edit-form" method="POST" action="" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
-                <div class="modal-header shadow" style="background-color: #c0ffe2">
-                    <h4 class="modal_goods_edit_title"><b></b></h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <div class="modal-header p-0">
+                    <div class="col-11 pt-3 px-3">
+                        <span class="" id="modal_product_edit_title"></span>
+                    </div>
+                    <div class="col-1 btn-group">
+                        <button style="background-color: #3c4054; color: white;" type="button" onclick="$('.modal-product-edit').modal('hide');">X</button>
+                    </div>
                 </div>
-                <div class="modal-body" style="background-color: #d5fdef">
-                    <span class="modal_goods_edit_save_results"></span>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item" style="background-color: #e6fff4">
-                            <div class="row">
-                                <div class="col">
-                                    <h6><b><label for="modal_goods_edit_name">Имя товара</label></b></h6>
-                                    <input class="form-control modal_goods_edit_name" id="modal_goods_edit_name" type="text" name="name">
-                                    <br>
-                                    <h6><b><label for="modal_goods_edit_slug">slug товара</label></b></h6>
-                                    <input class="form-control modal_goods_edit_slug" id="modal_goods_edit_slug" type="text" name="slug">
-                                    <br>
-                                    <h6><b><label for="modal_goods_edit_description">Описание</label></b></h6>
-                                    <textarea class="form-control modal_goods_edit_description" id="modal_goods_edit_description" rows="2" name="description"></textarea>
-                                </div>
-                                <div class="col">
-                                    <h6><b><label for="modal_goods_edit_image">Изображение товара</label></b></h6>
-                                    <input type="file" name="file" id="modal_goods_edit_image" class="form-control-file">
-                                    <br>
-                                    <span class="modal_goods_edit_image" id="modal_goods_edit_image"></span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item" style="background-color: #e6fff4">
-                            <div class="row">
-                                <div class="col">
-                                    <h6><b><label for="modal_goods_edit_price">Цена товара</label></b></h6>
-                                    <input class="form-control modal_goods_edit_price" id="modal_goods_edit_price" type="text" name="price">
-                                </div>
-                                <div class="col">
-                                    <h6><b><label for="modal_goods_edit_category">Категория товара</label></b></h6>
-                                    <span class="modal_goods_edit_category" id="modal_goods_edit_category"></span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item text-center" style="background-color: #e6fff4">
-                            <h6><b>Дополнительные характеристики товара</b></h6>
-                            <span class="modal_goods_edit_additional_chars"></span>
-                        </li>
-                        <li class="list-group-item" style="background-color: #e6fff4">
-                            <div class="row">
-                                <div class="col">
-                                    <h6><b>Время создания товара</b></h6>
-                                    <p><span class="modal_goods_edit_created_at"></span></p>
-                                </div>
-                                <div class="col">
-                                    <h6><b>Время последнего изменения товара</b></h6>
-                                    <p><span class="modal_goods_edit_updated_at"></span></p>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                <div class="modal-body">
+                    <span id="modal_product_edit_save_results"></span>
+                    <p class="text-white" style="background: #3c4054">
+                        <label for="modal_product_edit_article">Артикул</label>
+                        <input class="form-control form-control-sm" id="modal_product_edit_article" type="text" name="article">
+                    </p>
+                    <p class="text-white" style="background: #3c4054">
+                        <label for="modal_product_edit_name">Название</label>
+                        <input class="form-control form-control-sm" id="modal_product_edit_name" type="text" name="name">
+                    </p>
+                    <p class="text-white" style="background: #3c4054">
+                        <label for="modal_product_edit_status">Статус</label>
+                        <span id="modal_product_edit_status"></span>
+                    </p>
+                    <h6 class="text-white"><b>Атрибуты</b></h6>
+                    <span id="modal_product_edit_data"></span>
+                    <a class="text-info btn-attr-input-add" data-next_attr="" href="#" style="font-size: .7rem;">+ Добавить атрибут</a>
                 </div>
-                <div class="modal-footer shadow" style="background-color: #c0ffe2">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <div class="btn-modal_goods_edit_save"></div>
-                </div>
+                <div class="p-3" id="modal_product_edit_save"></div>
             </form>
         </div>
     </div>

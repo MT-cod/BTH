@@ -3,10 +3,10 @@
 @section('content')
 
 <!-- Scripts -->
-{{--<script src="/js/products_funcs.js"></script>--}}
+<script src="/js/products_funcs.js"></script>
 
 <!-- Styles -->
-<link href="{{ asset('css/online_store_green.css') }}" rel="stylesheet">
+<link href="{{ asset('css/products.css') }}" rel="stylesheet">
 
 <div class="container-fluid" style="background: whitesmoke">
 
@@ -25,9 +25,9 @@
     </div>
 
     <!-- Modals -->
-    {{--@include('product.modal_product_show')
+    @include('product.modal_product_show')
     @include('product.modal_product_edit')
-    @include('product.modal_product_create')--}}
+{{--    @include('product.modal_product_create')--}}
     <!-- Modals-end -->
 
 </div>

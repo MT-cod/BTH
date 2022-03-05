@@ -8,10 +8,10 @@
                 <th scope="col">АТРИБУТЫ</th>
             </tr>
         </thead>
-        <tbody style="background-color: rgba(0,0,0,0.05);">
+        <tbody>
             @foreach ($data as $product)
                 <tr
-                    class="clickableRow btn-modal_goods_show"
+                    class="clickableRow modal_product_show"
                     data-id="{{$product['id']}}"
                     data-edit_route="{{route('products.update', $product['id'])}}"
                     data-delete_route="{{route('products.destroy', $product['id'])}}"

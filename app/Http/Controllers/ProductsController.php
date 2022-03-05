@@ -53,7 +53,7 @@ class ProductsController extends Controller
      */
     public function show(Product $product): JsonResponse
     {
-        return Response::json(Product::findOrFail($product)->get()->toArray());
+        return Response::json($product->toArray());
     }
 
     /**

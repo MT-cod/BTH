@@ -22,9 +22,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
 </head>
 <body>
-<div class="row" id="app">
+<div class="row" id="app" style="overflow: hidden;">
     <div class="col-1" style="height: 100vh !important;background: #3c4054">
         <ul class="nav flex-column">
             <li class="nav-item">
@@ -33,7 +34,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white active" href="{{ route('products.index') }}">{{ __('Продукты') }}</a>
+                <a class="nav-link text-white" href="{{ route('products.index') }}">{{ __('Продукты') }}</a>
             </li>
         </ul>
     </div>
