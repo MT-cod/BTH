@@ -22,11 +22,13 @@
                     <td>{{ $product['article'] }}</td>
                     <td>{{ $product['name'] }}</td>
                     <td>{{ ($product['status'] === "available") ? 'Доступен' : 'Недоступен'}}</td>
-                    <td>{{ implode("\n", array_map(
-                        static fn ($key, $val) => $key . ': ' . $val,
-                        array_keys(json_decode($product['data'], true)),
-                        json_decode($product['data'], true)
-                        )) }}</td>
+                    @if ($product['data'])
+                        <td>{{ implode("\n", array_map(
+                            static fn ($key, $val) => $key . ': ' . $val,
+                            array_keys(json_decode($product['data'], true)),
+                            json_decode($product['data'], true)
+                            )) }}</td>
+                    @endif
                 </tr>
             @endforeach
         </tbody>

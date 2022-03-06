@@ -1,59 +1,37 @@
-<div class="modal fade" id="modal-item-create" tabindex="-1" role="dialog" aria-hidden="true" style="max-height:100vh !important; overflow-y:scroll !important; scrollbar-width: thin !important;">
-    <div class="modal-dialog modal-dialog-centered modal-xl">
-        <div class="modal-content">
-            <form id="modal-item-create-form" method="POST" action="{{route('goods.store')}}">
+<div class="modal fade modal-product-create" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="top: 4vh; left: calc(50vw - 50%); position: absolute; background: #3c4054">
+            <form id="modal-product-create-form" method="POST" action="{{route('products.store')}}" enctype="multipart/form-data">
                 @csrf
-                <div class="modal-header shadow" style="background-color: #c0ffe2">
-                    <h4 class="modal_goods_create_title"><b></b></h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <div class="modal-header p-0">
+                    <div class="col-11 pt-3 px-3">
+                        <h4 class="text-white"><b>Добавить продукт</b></h4>
+                    </div>
+                    <div class="col-1 btn-group">
+                        <button style="background-color: #3c4054; color: white;" type="button" onclick="$('.modal-product-create').modal('hide');">X</button>
+                    </div>
                 </div>
-                <div class="modal-body" style="background-color: #d5fdef">
-                    <span class="modal_goods_create_results"></span>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item" style="background-color: #e6fff4">
-                            <div class="row">
-                                <div class="col-6">
-                                    <h6><b><label for="modal_goods_create_name">Имя товара</label></b></h6>
-                                    <input class="form-control modal_goods_create_name" id="modal_goods_create_name" type="text" name="name">
-                                </div>
-                                <div class="col-3">
-                                    <h6><b><label for="modal_goods_create_slug">slug товара</label></b></h6>
-                                    <input class="form-control modal_goods_create_slug" id="modal_goods_create_slug" type="text" name="slug">
-                                </div>
-                                <div class="col-3">
-                                    <h6><b><label for="modal_goods_create_image">Изображение товара</label></b></h6>
-                                    <input type="file" name="file" id="modal_goods_create_image" class="form-control-file">
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item" style="background-color: #e6fff4">
-                            <h6><b><label for="modal_goods_create_description">Описание</label></b></h6>
-                            <textarea class="form-control modal_goods_create_description" id="modal_goods_create_description" rows="2" name="description"></textarea>
-                        </li>
-                        <li class="list-group-item" style="background-color: #e6fff4">
-                            <div class="row">
-                                <div class="col">
-                                    <h6><b><label for="modal_goods_create_price">Цена товара</label></b></h6>
-                                    <input class="form-control modal_goods_create_price" id="modal_goods_create_price" type="text" name="price">
-                                </div>
-                                <div class="col">
-                                    <h6><b><label for="modal_goods_create_category">Категория товара</label></b></h6>
-                                    <span class="modal_goods_create_category" id="modal_goods_create_category"></span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item" style="background-color: #e6fff4">
-                            <h6><b><center>Дополнительные характеристики товара</center></b></h6>
-                            <span class="modal_goods_create_additional_chars"></span>
-                        </li>
-                    </ul>
+                <div class="modal-body">
+                    <p class="text-white" style="background: #3c4054">
+                        <label for="modal_product_create_article">Артикул</label>
+                        <input class="form-control form-control-sm" id="modal_product_create_article" type="text" name="article">
+                    </p>
+                    <p class="text-white" style="background: #3c4054">
+                        <label for="modal_product_create_name">Название</label>
+                        <input class="form-control form-control-sm" id="modal_product_create_name" type="text" name="name">
+                    </p>
+                    <p class="text-white" style="background: #3c4054">
+                        <label for="modal_product_create_status">Статус</label>
+                        <select class="form-control form-control-sm" name="status" id="modal_product_create_status">
+                            <option value="available">Доступен</option>
+                            <option selected="selected" value="unavailable">Недоступен</option>
+                        </select>
+                    </p>
+                    <h6 class="text-white"><b>Атрибуты</b></h6>
+                    <span id="modal_product_create_data"></span>
+                    <a class="text-info btn-attr-input-add" data-next_attr="" data-action_factor="create" href="#" style="font-size: .7rem;">+ Добавить атрибут</a>
                 </div>
-                <div class="modal-footer shadow" style="background-color: #c0ffe2">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="submit" class="btn btn-primary btn-modal_goods_try_store">Сохранить</button>
-                </div>
+                <div class="p-3" id="modal_product_create_save"></div>
             </form>
         </div>
     </div>

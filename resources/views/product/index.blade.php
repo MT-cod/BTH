@@ -27,7 +27,7 @@
     <!-- Modals -->
     @include('product.modal_product_show')
     @include('product.modal_product_edit')
-{{--    @include('product.modal_product_create')--}}
+    @include('product.modal_product_create')
     <!-- Modals-end -->
 
 </div>

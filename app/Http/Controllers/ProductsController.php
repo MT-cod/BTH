@@ -23,25 +23,25 @@ class ProductsController extends Controller
      */
     public function index(): View|Factory|Application
     {
-        return view('product.index', ['data' => Product::all()->toArray()]);
+        return view('product.index', ['data' => Product::select()->orderBy('article')->get()->toArray()]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param StoreProductRequest $request
-     * @return RedirectResponse
+     * @return JsonResponse
      */
-    public function store(StoreProductRequest $request): RedirectResponse
+    public function store(StoreProductRequest $request): JsonResponse
     {
         try {
-            $productData = Product::create($request->validated()->get()->toArray());
-            //dispatch(new SendEmailJob($productData));
+            $product = Product::create($request->validated());
+            dispatch(new SendEmailJob($product->toArray()));
             flash('Продкут успешно создан!')->success()->important();
-            return Redirect::to($_SERVER['HTTP_REFERER']);
+            return Response::json(['referer' => $_SERVER['HTTP_REFERER']]);
         } catch (\Throwable $e) {
             flash('Не удалось создать продукт!')->error()->important();
-            return Redirect::to($_SERVER['HTTP_REFERER']);
+            return Response::json('', 400);
         }
     }
 
@@ -61,17 +61,17 @@ class ProductsController extends Controller
      *
      * @param UpdateProductRequest $request
      * @param Product $product
-     * @return RedirectResponse
+     * @return JsonResponse
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
         try {
             $product->update($request->validated());
             flash('Продкут успешно изменён.')->success()->important();
-            return Redirect::to($_SERVER['HTTP_REFERER']);
+            return Response::json(['referer' => $_SERVER['HTTP_REFERER']]);
         } catch (\Throwable $e) {
             flash('Не удалось изменить продукт!')->error()->important();
-            return Redirect::to($_SERVER['HTTP_REFERER']);
+            return Response::json('', 400);
         }
     }
 

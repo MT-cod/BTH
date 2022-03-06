@@ -28,8 +28,8 @@ class Notification extends Mailable
      *
      * @return $this
      */
-    public function build()
+    public function build(): static
     {
-        return $this->view('emails.notification', ['data' => $this->data]);
+        return $this->view('emails.notification', ['product' => $this->data]);
     }
 }

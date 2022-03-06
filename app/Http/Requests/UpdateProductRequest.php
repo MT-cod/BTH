@@ -22,7 +22,7 @@ class UpdateProductRequest extends FormRequest
                 'max:255',
                 Rule::unique('products')->ignore(request()->product),
                 function ($attr, $val, $fail): void {
-                    if (Auth::user()->role === config('products.role')) {
+                    if (Auth::user()->role !== config('products.role')) {
                         $fail('Пользователь не имеет права на редактирование артикула!');
                     }
                 }],

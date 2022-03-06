@@ -2,5 +2,5 @@
 
 return [
     'role' => 'admin',
-    'email' => 'test@testttt.ru'
+    'email' => 'k@mamont.xyz'
 ];

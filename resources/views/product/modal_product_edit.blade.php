@@ -13,7 +13,6 @@
                     </div>
                 </div>
                 <div class="modal-body">
-                    <span id="modal_product_edit_save_results"></span>
                     <p class="text-white" style="background: #3c4054">
                         <label for="modal_product_edit_article">Артикул</label>
                         <input class="form-control form-control-sm" id="modal_product_edit_article" type="text" name="article">
@@ -28,7 +27,7 @@
                     </p>
                     <h6 class="text-white"><b>Атрибуты</b></h6>
                     <span id="modal_product_edit_data"></span>
-                    <a class="text-info btn-attr-input-add" data-next_attr="" href="#" style="font-size: .7rem;">+ Добавить атрибут</a>
+                    <a class="text-info btn-attr-input-add" data-next_attr="" data-action_factor="edit" href="#" style="font-size: .7rem;">+ Добавить атрибут</a>
                 </div>
                 <div class="p-3" id="modal_product_edit_save"></div>
             </form>
